@@ -3,6 +3,7 @@
 namespace PhotoWebPortfolio.Services
 {
     public interface IFolderService
-    { 
+    {   
+
     }
 }
