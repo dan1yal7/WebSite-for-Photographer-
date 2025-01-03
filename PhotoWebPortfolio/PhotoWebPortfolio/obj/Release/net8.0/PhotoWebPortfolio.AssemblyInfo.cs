@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PhotoWebPortfolio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5937ada7e2c306eec76c97836c0092363e254d9e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7647d2c7dda8b7c07fe3f22e83c89b5b0b3f8dc2")]
 [assembly: System.Reflection.AssemblyProductAttribute("PhotoWebPortfolio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PhotoWebPortfolio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
