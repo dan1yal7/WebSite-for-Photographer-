@@ -21,7 +21,5 @@ namespace PhotoWebPortfolio.Services
             var url = $"https://storage.googleapis.com/{_bucketName}/{fileName}";
             return url;
         }
-
-       
     }
 }
