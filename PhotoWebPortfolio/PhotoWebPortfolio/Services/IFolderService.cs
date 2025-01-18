@@ -17,23 +17,43 @@ namespace PhotoWebPortfolio.Services
     public class FolderService : IFolderService
     {
        private readonly IFolderRepository _folderRepository;
+       private readonly ILogger _logger;
 
-        public FolderService(IFolderRepository folderRepository)
+        public FolderService(IFolderRepository folderRepository, ILogger logger)
         {
             _folderRepository = folderRepository;
-        }
+            _logger = logger;
+        } 
+
+
 
         public async Task<Folder> CreateFolderAsync(Folder folder)
-        {
-          if(folder == null)
-           throw new ArgumentNullException(nameof(folder));
-          var folderName = folder.Name;
-          return await _folderRepository.CreateAsync(folder);
+        { 
+         if(folder == null)
+         throw new ArgumentNullException(nameof(folder));
+
+          if(string.IsNullOrEmpty(folder.Name))
+          {
+            throw new ArgumentNullException("Folder name cannot be null or empty", nameof(folder));
+          } 
+           var folderName = folder.Name;
+           return await _folderRepository.CreateAsync(folder);
         }
 
-        public Task DeleteFolderAsync(int folderId)
+        public async Task DeleteFolderAsync(int folderId)
         {
-            throw new NotImplementedException();
+            if (folderId < 0)
+            _logger.LogError("Folder is not found"); 
+            var folder = _folderRepository.GetById(folderId);
+            try
+            {
+                var deleteFolder = _folderRepository.DeleteAsync(folderId);
+                Console.WriteLine($"Proccessing succeeded {deleteFolder}");
+            } 
+            catch (Exception ex)
+            { 
+              Console.WriteLine($"Proccess failed: {ex.Message}");
+            }
         }
 
         public Task<IEnumerable<Folder>> GetAllFoldersAsync()
