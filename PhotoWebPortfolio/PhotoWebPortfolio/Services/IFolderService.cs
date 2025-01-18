@@ -43,16 +43,19 @@ namespace PhotoWebPortfolio.Services
         public async Task DeleteFolderAsync(int folderId)
         {
             if (folderId < 0)
-            _logger.LogError("Folder is not found"); 
-            var folder = _folderRepository.GetById(folderId);
+            {
+              _logger.LogError($"Invalid folderId: {folderId}. Folder deletion aborted", folderId);
+               return;
+            }
             try
             {
-                var deleteFolder = _folderRepository.DeleteAsync(folderId);
-                Console.WriteLine($"Proccessing succeeded {deleteFolder}");
+                await _folderRepository.DeleteAsync(folderId);
+                _logger.LogInformation($"Proccessing succeeded {folderId}");
             } 
             catch (Exception ex)
-            { 
-              Console.WriteLine($"Proccess failed: {ex.Message}");
+            {
+                _logger.LogError($"Deletion proccess failed: {ex.Message}");
+                throw;
             }
         }
 

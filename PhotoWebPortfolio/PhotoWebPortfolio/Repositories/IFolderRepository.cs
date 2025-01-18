@@ -7,7 +7,7 @@ namespace PhotoWebPortfolio.Repositories
     public interface IFolderRepository
     {
        Task<Folder> CreateAsync(Folder folder);
-       Task<Folder> GetById(int folderId); 
+       Task<Folder> GetByIdAsync(int folderId); 
        Task<IEnumerable<Folder>> GetAllAsync();
        Task DeleteAsync(int folderId);
        Task UpdateAsync(Folder folder);
@@ -27,7 +27,7 @@ namespace PhotoWebPortfolio.Repositories
             await _dbContext.SaveChangesAsync();
             return folder;
         }
-        public async Task<Folder> GetById(int folderId)
+        public async Task<Folder> GetByIdAsync(int folderId)
         {
            return await _dbContext.folders.FindAsync(folderId);
         }
