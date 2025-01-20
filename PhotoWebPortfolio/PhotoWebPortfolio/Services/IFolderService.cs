@@ -59,9 +59,18 @@ namespace PhotoWebPortfolio.Services
             }
         }
 
-        public Task<IEnumerable<Folder>> GetAllFoldersAsync()
+        public async Task<IEnumerable<Folder>> GetAllFoldersAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+               var folders = await _folderRepository.GetAllAsync();
+               return folders ?? Enumerable.Empty<Folder>();    
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while retrieving all folders");
+                throw;
+            }
         }
 
         public Task<string> GetFileUrlFromGSCAsync(string fileName)
