@@ -3,6 +3,7 @@ using PhotoWebPortfolio.Repositories;
 
 namespace PhotoWebPortfolio.Services
 {
+    #region Contract
     public interface IFolderService
     {
         Task<Folder> CreateFolderAsync(Folder folder);
@@ -12,20 +13,23 @@ namespace PhotoWebPortfolio.Services
         Task<Folder> UpdateFolderAsync(Folder folder);
         Task UploadFileToGSCAsycn(string folderName, IFormFile file);
         Task<string> GetFileUrlFromGSCAsync(string fileName); 
-    } 
+    }
+    #endregion
 
     public class FolderService : IFolderService
     {
-       private readonly IFolderRepository _folderRepository;
-       private readonly ILogger _logger;
+        #region Fields 
+        private readonly IFolderRepository _folderRepository;
+        private readonly ILogger _logger;
+        #endregion
 
+        #region Ctor
         public FolderService(IFolderRepository folderRepository, ILogger logger)
         {
             _folderRepository = folderRepository;
             _logger = logger;
-        } 
-
-
+        }
+        #endregion
 
         public async Task<Folder> CreateFolderAsync(Folder folder)
         { 
@@ -74,7 +78,7 @@ namespace PhotoWebPortfolio.Services
         }
 
         public Task<string> GetFileUrlFromGSCAsync(string fileName)
-        {
+        {  
             throw new NotImplementedException();
         }
 
