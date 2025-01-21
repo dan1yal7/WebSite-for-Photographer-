@@ -39,16 +39,10 @@ namespace PhotoWebPortfolio.Services
         #region Methods 
         public async Task<Folder> CreateFolderAsync(Folder folder)
         {
-          if (folder == null)
-          {
-            throw new ArgumentNullException(nameof(folder));
-          }
-
           if(string.IsNullOrEmpty(folder.Name))
           {
             throw new ArgumentException(nameof(folder),"Folder name cannot be null or empty");
           } 
-           var folderName = folder.Name;
            return await _folderRepository.CreateAsync(folder);
         }
 
