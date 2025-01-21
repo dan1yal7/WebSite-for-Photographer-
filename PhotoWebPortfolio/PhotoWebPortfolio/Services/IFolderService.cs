@@ -19,22 +19,30 @@ namespace PhotoWebPortfolio.Services
     public class FolderService : IFolderService
     {
         #region Fields 
+        private readonly IGcsService _gcsService;
         private readonly IFolderRepository _folderRepository;
         private readonly ILogger _logger;
         #endregion
 
         #region Ctor
-        public FolderService(IFolderRepository folderRepository, ILogger logger)
+        public FolderService(
+            IFolderRepository folderRepository, 
+            ILogger logger,
+            IGcsService gcsService)
         {
             _folderRepository = folderRepository;
             _logger = logger;
+            _gcsService = gcsService;
         }
         #endregion
 
+        #region Methods 
         public async Task<Folder> CreateFolderAsync(Folder folder)
-        { 
-         if(folder == null)
-         throw new ArgumentNullException(nameof(folder));
+        {
+          if (folder == null)
+          {
+            throw new ArgumentNullException(nameof(folder));
+          }
 
           if(string.IsNullOrEmpty(folder.Name))
           {
@@ -54,7 +62,7 @@ namespace PhotoWebPortfolio.Services
             try
             {
                 await _folderRepository.DeleteAsync(folderId);
-                _logger.LogInformation($"Proccessing succeeded {folderId}");
+                _logger.LogInformation($"Processing succeeded {folderId}");
             } 
             catch (Exception ex)
             {
@@ -77,14 +85,39 @@ namespace PhotoWebPortfolio.Services
             }
         }
 
-        public Task<string> GetFileUrlFromGSCAsync(string fileName)
+        public async Task<string> GetFileUrlFromGSCAsync(string fileName)
         {  
-            throw new NotImplementedException();
+            if(!string.IsNullOrEmpty(fileName))
+            {
+                throw new ArgumentNullException("File could not be found or does not exist", nameof(fileName));
+            } 
+            var url = await _gcsService.GetFileUrl(fileName);
+            return url;
         }
 
-        public Task<Folder> GetFolderAsync(int folderId)
+        public async Task<Folder?> GetFolderAsync(int folderId)
         {
-            throw new NotImplementedException();
+            if(folderId < 0)
+            {
+              _logger.LogError($"Invalid folderId: {folderId}");
+               return null;
+            }
+            try
+            {
+                var folder = await _folderRepository.GetByIdAsync(folderId);
+                if(folder == null)
+                {
+                    _logger.LogWarning("Folder with ID {FolderId} not found.", folderId);
+                    return null;
+                }
+                _logger.LogInformation($"Process succeeded:{folderId}");
+                return folder;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Getting process failed: {ex.Message}");
+                throw;
+            }
         }
 
         public Task<Folder> UpdateFolderAsync(Folder folder)
@@ -92,10 +125,11 @@ namespace PhotoWebPortfolio.Services
             throw new NotImplementedException();
         }
 
-        public Task UploadFileToGSCAsycn(string folderName, IFormFile file)
-        {
+        public async Task UploadFileToGSCAsycn(string folderName, IFormFile file)
+        { 
             throw new NotImplementedException();
         }
+        #endregion
     }
 
 }

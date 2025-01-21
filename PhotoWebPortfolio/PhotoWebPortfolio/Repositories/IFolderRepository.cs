@@ -28,7 +28,7 @@ namespace PhotoWebPortfolio.Repositories
             return folder;
         }
         public async Task<Folder> GetByIdAsync(int folderId)
-        {
+        { 
            return await _dbContext.folders.FindAsync(folderId);
         }
 
