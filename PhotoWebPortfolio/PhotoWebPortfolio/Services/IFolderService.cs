@@ -46,7 +46,7 @@ namespace PhotoWebPortfolio.Services
 
           if(string.IsNullOrEmpty(folder.Name))
           {
-            throw new ArgumentNullException("Folder name cannot be null or empty", nameof(folder));
+            throw new ArgumentException(nameof(folder),"Folder name cannot be null or empty");
           } 
            var folderName = folder.Name;
            return await _folderRepository.CreateAsync(folder);
@@ -120,9 +120,31 @@ namespace PhotoWebPortfolio.Services
             }
         }
 
-        public Task<Folder> UpdateFolderAsync(Folder folder)
-        {
-            throw new NotImplementedException();
+        public async Task<Folder> UpdateFolderAsync(Folder folder)
+        { 
+            if(folder == null)
+            {  
+             throw new ArgumentNullException(nameof(folder));
+            }
+            if(string.IsNullOrEmpty(folder.Name))
+            {
+              throw new ArgumentException(nameof(folder),"Folder name cannot be null or empty");
+            }
+            try
+            {
+                var updatedFolder = await _folderRepository.UpdateAsync(folder); 
+                if(updatedFolder == null)
+                {
+                    throw new InvalidOperationException($"Failed to update the folder with Id {folder.Id}");
+                }
+                _logger.LogInformation($"Process succeeded. Folder with Id {folder.Id} is updated");
+                return updatedFolder;
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Update operation failed: {ex.Message}");
+                throw;
+            }
         }
 
         public async Task UploadFileToGSCAsycn(string folderName, IFormFile file)
