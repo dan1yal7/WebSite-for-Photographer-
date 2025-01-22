@@ -50,7 +50,7 @@ namespace PhotoWebPortfolio.Services
         {
             if (folderId < 0)
             {
-              _logger.LogError($"Invalid folderId: {folderId}. Folder deletion aborted", folderId);
+              _logger.LogError($"Invalid folderId: {folderId}");
                return;
             }
             try

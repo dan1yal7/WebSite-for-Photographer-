@@ -5,7 +5,8 @@ namespace PhotoWebPortfolio.Services
 {
     public interface IGcsService
     {
-        Task<string> GetFileUrl (string fileName);
+        Task<string> GetFileUrl(string fileName);
+        Task<string> UploadFileUrl(string fileName);
     } 
     
     public class GscService : IGcsService
@@ -20,6 +21,11 @@ namespace PhotoWebPortfolio.Services
         {
             var url = $"https://storage.googleapis.com/{_bucketName}/{fileName}";
             return url;
+        }
+
+        public Task<string> UploadFileUrl(string fileName)
+        {
+            throw new NotImplementedException();
         }
     }
 }
