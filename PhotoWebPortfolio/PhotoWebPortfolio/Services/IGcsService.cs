@@ -1,31 +1,38 @@
 ﻿using Google.Cloud.Storage.V1;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.CompilerServices;
 
 namespace PhotoWebPortfolio.Services
 {
     public interface IGcsService
     {
-        Task<string> GetFileUrl(string fileName);
-        Task<string> UploadFileUrl(string fileName);
+        Task<string> GetFileUrlAsync(string fileName);
+        Task UploadFileAsync(string localPath, string folderName, IFormFile file);
     } 
     
     public class GscService : IGcsService
     {
         private readonly string _bucketName = "photoagency-storagetestdemo";
-        public GscService(string bucketName)
+        private readonly StorageClient _storageClient;
+        public GscService(string bucketName, StorageClient storageClient)
         {
             _bucketName = bucketName;
+            _storageClient = storageClient;
         }
 
-        public async Task<string> GetFileUrl(string fileName)
+        public async Task<string> GetFileUrlAsync(string fileName)
         {
             var url = $"https://storage.googleapis.com/{_bucketName}/{fileName}";
             return url;
         }
 
-        public Task<string> UploadFileUrl(string fileName)
+        public async Task UploadFileAsync(string localPath, string folderName, IFormFile file)
         {
-            throw new NotImplementedException();
+            var objectName = $"{folderName}/{file.FileName}";
+            using var stream = file.OpenReadStream();
+            await _storageClient.UploadObjectAsync(_bucketName, objectName, file.ContentType, stream);
         }
+
+    }
     }
 }

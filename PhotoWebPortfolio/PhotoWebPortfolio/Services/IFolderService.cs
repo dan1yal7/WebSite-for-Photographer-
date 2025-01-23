@@ -85,7 +85,7 @@ namespace PhotoWebPortfolio.Services
             {
                 throw new ArgumentNullException("File could not be found or does not exist", nameof(fileName));
             } 
-            var url = await _gcsService.GetFileUrl(fileName);
+            var url = await _gcsService.GetFileUrlAsync(fileName);
             return url;
         }
 
