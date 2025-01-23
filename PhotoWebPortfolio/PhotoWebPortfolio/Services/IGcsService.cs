@@ -7,7 +7,7 @@ namespace PhotoWebPortfolio.Services
     public interface IGcsService
     {
         Task<string> GetFileUrlAsync(string fileName);
-        Task UploadFileAsync(string localPath, string folderName, IFormFile file);
+        Task UploadFileAsync(string folderName, IFormFile file);
     } 
     
     public class GscService : IGcsService
@@ -26,7 +26,7 @@ namespace PhotoWebPortfolio.Services
             return url;
         }
 
-        public async Task UploadFileAsync(string localPath, string folderName, IFormFile file)
+        public async Task UploadFileAsync(string folderName, IFormFile file)
         {
             var objectName = $"{folderName}/{file.FileName}";
             using var stream = file.OpenReadStream();

@@ -83,7 +83,7 @@ namespace PhotoWebPortfolio.Services
         {  
             if(!string.IsNullOrEmpty(fileName))
             {
-                throw new ArgumentNullException("File could not be found or does not exist", nameof(fileName));
+                throw new ArgumentException("File could not be found or does not exist", nameof(fileName));
             } 
             var url = await _gcsService.GetFileUrlAsync(fileName);
             return url;
@@ -143,7 +143,7 @@ namespace PhotoWebPortfolio.Services
 
         public async Task UploadFileToGSCAsycn(string folderName, IFormFile file)
         { 
-            throw new NotImplementedException();
+           
         }
         #endregion
     }
