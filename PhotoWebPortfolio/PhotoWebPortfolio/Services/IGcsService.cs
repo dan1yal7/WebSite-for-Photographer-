@@ -34,5 +34,4 @@ namespace PhotoWebPortfolio.Services
         }
 
     }
-    }
 }

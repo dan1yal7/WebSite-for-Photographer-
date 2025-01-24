@@ -142,8 +142,24 @@ namespace PhotoWebPortfolio.Services
         }
 
         public async Task UploadFileToGSCAsycn(string folderName, IFormFile file)
-        { 
-           
+        {
+            if (string.IsNullOrEmpty(folderName))
+            {
+                throw new ArgumentException(nameof(folderName), "Folder name cannot be null or empty");
+            } 
+            if (file == null)
+            {
+                throw new ArgumentNullException(nameof(file), "File cannot be null");
+            }
+            try
+            {
+                await _gcsService.UploadFileAsync(folderName, file);
+                _logger.LogInformation($"File: {file.FileName} successfully uploaded to {folderName}");
+            }
+            catch (Exception ex)
+            {
+              _logger.LogError(ex, $"Upload operation failed for file: {file?.FileName ?? "Unknown file"}");
+            }
         }
         #endregion
     }
