@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PhotoWebPortfolio.Infrastructure;
+using PhotoWebPortfolio.Repositories;
+using PhotoWebPortfolio.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DevConnection")));
+builder.Services.AddScoped<IFolderRepository, FolderRepository>();
+builder.Services.AddScoped<IFolderService, FolderService>();
 
 var app = builder.Build();
 
