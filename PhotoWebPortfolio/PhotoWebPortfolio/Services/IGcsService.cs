@@ -8,8 +8,8 @@ namespace PhotoWebPortfolio.Services
     {
         Task<string> GetFileUrlAsync(string fileName);
         Task UploadFileAsync(string folderName, IFormFile file);
-    } 
-    
+    }
+
     public class GscService : IGcsService
     {
         private readonly string _bucketName = "photoagency-storagetestdemo";
