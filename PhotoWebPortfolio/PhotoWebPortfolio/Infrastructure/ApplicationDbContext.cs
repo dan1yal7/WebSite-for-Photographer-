@@ -16,7 +16,7 @@ namespace PhotoWebPortfolio.Infrastructure
         public DbSet<FolderItem> folderItems { get; set; } 
         public DbSet<PortfolioItem> portfolioItems { get; set; }
         public DbSet<Role> roles { get; set; }
-        public DbSet<Services> services { get; set; }
+        public DbSet<Services> Services { get; set; }
         public DbSet<User> users { get; set; }
 
     }

@@ -1,4 +1,4 @@
-﻿namespace PhotoWebPortfolio.Models
+﻿namespace PhotoWebPortfolio.Models 
 {
     public class Services
     {

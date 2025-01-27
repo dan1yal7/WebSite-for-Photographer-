@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PhotoWebPortfolio.Infrastructure;
 using PhotoWebPortfolio.Repositories;
-using PhotoWebPortfolio.Services;
+using PhotoWebPortfolio.Serv;
 
 var builder = WebApplication.CreateBuilder(args);
 
