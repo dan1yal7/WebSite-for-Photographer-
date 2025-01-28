@@ -49,8 +49,20 @@ namespace TestPortfolioUnit
           _folderRepositoryMock.Verify(repo => repo.CreateAsync(folder), Times.Once);
       }
 
+      [Fact]
+      public async Task DeleteF()
+      {
+          //Arrange
+          _folderRepositoryMock.Setup(repo => repo.DeleteAsync(1));
+
+          //Act
+          var result = await _folderService.DeleteFolderAsync();
+
+          //Assert
+          Assert.Equal(1, result);
+          _folderRepositoryMock.Verify(repo => repo.DeleteAsync(1));
+      }
 
     }
-
 
 }
