@@ -134,3 +134,4 @@ C:\Users\admin\source\repos\WebSite-for-Photographer-\PhotoWebPortfolio\TestPort
 C:\Users\admin\source\repos\WebSite-for-Photographer-\PhotoWebPortfolio\TestPortfolio\obj\Debug\net9.0\TestPortfolioUnit.pdb
 C:\Users\admin\source\repos\WebSite-for-Photographer-\PhotoWebPortfolio\TestPortfolio\obj\Debug\net9.0\TestPortfolioUnit.genruntimeconfig.cache
 C:\Users\admin\source\repos\WebSite-for-Photographer-\PhotoWebPortfolio\TestPortfolio\obj\Debug\net9.0\ref\TestPortfolioUnit.dll
+C:\Users\admin\source\repos\WebSite-for-Photographer-\PhotoWebPortfolio\TestPortfolio\bin\Debug\net9.0\NSubstitute.dll

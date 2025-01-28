@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "as8CM+g1E0o=",
+  "dgSpecHash": "TTD1tGZh2mw=",
   "success": true,
   "projectFilePath": "C:\\Users\\admin\\source\\repos\\WebSite-for-Photographer-\\PhotoWebPortfolio\\TestPortfolio\\TestPortfolioUnit.csproj",
   "expectedPackageFiles": [
@@ -37,6 +37,7 @@
     "C:\\Users\\admin\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\npgsql\\9.0.2\\npgsql.9.0.2.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\9.0.2\\npgsql.entityframeworkcore.postgresql.9.0.2.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\nsubstitute\\5.3.0\\nsubstitute.5.3.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\system.codedom\\7.0.0\\system.codedom.7.0.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\system.diagnostics.eventlog\\6.0.0\\system.diagnostics.eventlog.6.0.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\system.management\\7.0.2\\system.management.7.0.2.nupkg.sha512",
