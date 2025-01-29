@@ -12,13 +12,13 @@ namespace PhotoWebPortfolio.Serv
         Task DeleteFolderAsync(int folderId);
         Task<Folder> UpdateFolderAsync(Folder folder);
         Task UploadFileToGSCAsycn(string folderName, IFormFile file);
-        Task<string> GetFileUrlFromGSCAsync(string fileName); 
+        Task<string> GetFileUrlFromGSCAsync(string fileName);
     }
     #endregion
 
     public class FolderService : IFolderService
     {
-        #region Fields 
+        #region Fields
         private readonly IGcsService _gcsService;
         private readonly IFolderRepository _folderRepository;
         private readonly ILogger _logger;
@@ -26,7 +26,7 @@ namespace PhotoWebPortfolio.Serv
 
         #region Ctor
         public FolderService(
-            IFolderRepository folderRepository, 
+            IFolderRepository folderRepository,
             ILogger logger,
             IGcsService gcsService)
         {
@@ -36,13 +36,13 @@ namespace PhotoWebPortfolio.Serv
         }
         #endregion
 
-        #region Methods 
+        #region Methods
         public async Task<Folder> CreateFolderAsync(Folder folder)
         {
           if(string.IsNullOrEmpty(folder.Name))
           {
             throw new ArgumentException(nameof(folder),"Folder name cannot be null or empty");
-          } 
+          }
            return await _folderRepository.CreateAsync(folder);
         }
 
@@ -57,7 +57,7 @@ namespace PhotoWebPortfolio.Serv
             {
                 await _folderRepository.DeleteAsync(folderId);
                 _logger.LogInformation($"Processing succeeded {folderId}");
-            } 
+            }
             catch (Exception ex)
             {
                 _logger.LogError($"Deletion proccess failed: {ex.Message}");
@@ -70,7 +70,7 @@ namespace PhotoWebPortfolio.Serv
             try
             {
                var folders = await _folderRepository.GetAllAsync();
-               return folders ?? Enumerable.Empty<Folder>();    
+               return folders ?? Enumerable.Empty<Folder>();
             }
             catch (Exception ex)
             {
@@ -80,11 +80,11 @@ namespace PhotoWebPortfolio.Serv
         }
 
         public async Task<string> GetFileUrlFromGSCAsync(string fileName)
-        {  
+        {
             if(!string.IsNullOrEmpty(fileName))
             {
                 throw new ArgumentException("File could not be found or does not exist", nameof(fileName));
-            } 
+            }
             var url = await _gcsService.GetFileUrlAsync(fileName);
             return url;
         }
@@ -115,9 +115,9 @@ namespace PhotoWebPortfolio.Serv
         }
 
         public async Task<Folder> UpdateFolderAsync(Folder folder)
-        { 
+        {
             if(folder == null)
-            {  
+            {
              throw new ArgumentNullException(nameof(folder));
             }
             if(string.IsNullOrEmpty(folder.Name))
@@ -126,7 +126,7 @@ namespace PhotoWebPortfolio.Serv
             }
             try
             {
-                var updatedFolder = await _folderRepository.UpdateAsync(folder); 
+                var updatedFolder = await _folderRepository.UpdateAsync(folder);
                 if(updatedFolder == null)
                 {
                     throw new InvalidOperationException($"Failed to update the folder with Id {folder.Id}");
@@ -146,7 +146,7 @@ namespace PhotoWebPortfolio.Serv
             if (string.IsNullOrEmpty(folderName))
             {
                 throw new ArgumentException(nameof(folderName), "Folder name cannot be null or empty");
-            } 
+            }
             if (file == null)
             {
                 throw new ArgumentNullException(nameof(file), "File cannot be null");
@@ -165,4 +165,3 @@ namespace PhotoWebPortfolio.Serv
     }
 
 }
-

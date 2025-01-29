@@ -63,6 +63,29 @@ namespace TestPortfolioUnit
            _folderRepositoryMock.Verify(repo => repo.DeleteAsync(folderId), Times.Once);
       }
 
+      [Fact]
+      public async Task GetAllF()
+       {
+        //Arrange
+        var folders = new List<Folder>
+        {
+            new Folder { Name = "Folder 1" },
+            new Folder { Name = "Folder 2" }
+        };
+        _folderRepositoryMock.Setup(repo => repo.GetAllAsync()).ReturnsAsync(folders);
+
+        //Act
+        var result = await _folderService.GetAllFoldersAsync();
+
+        //Assert
+        Assert.NotNull(result);
+        Assert.Equal(2, result.Count());
+        Assert.Contains(result, f => f.Name == "Folder 1");
+        Assert.Contains(result, f => f.Name == "Folder 2");
+
+        _folderRepositoryMock.Verify(repo => repo.GetAllAsync(), Times.Once);
+       }
+
     }
 
 }
