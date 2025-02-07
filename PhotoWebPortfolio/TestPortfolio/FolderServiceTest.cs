@@ -90,8 +90,6 @@ namespace TestPortfolioUnit
       public async Task GetFileUrlFromGSC()
       {
        //Arrange
-       //
-       //
       }
 
     }
