@@ -13,7 +13,9 @@ public class GoogleInitTesting
 {
     private readonly ApplicationDbContext _dbContext;
     private readonly Mock<IFolderRepository> _folderRepositoryMock;
-    private readonly Mock<IGcService> _gcsServicee;
+    private readonly Mock<IGcService> _gcsService;
+    private readonly Mock<IFolderService> _folderService;
+    private readonly ILogger<IGcsService> _logger;
 }
 // Class
 // Arrange
