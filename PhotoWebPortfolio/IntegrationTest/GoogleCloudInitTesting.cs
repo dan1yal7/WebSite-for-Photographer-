@@ -16,10 +16,11 @@ public class GoogleInitTesting
     private readonly Mock<IGcService> _gcsService;
     private readonly Mock<IFolderService> _folderService;
     private readonly ILogger<IGcsService> _logger;
+    private readonly WebApplicationFactory<IGcService> _gcsServiceFactory;
 
     public GoogleInitTesting()
     {
-
+        
     }
 }
 // Class
